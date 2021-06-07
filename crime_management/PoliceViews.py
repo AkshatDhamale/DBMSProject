@@ -476,7 +476,7 @@ def add_investigation_save(request):
                 main_suspect_description=main_suspect_desc,main_suspect_defense=main_suspect_defense,legit_reason=legit_reason)
                 investigation_model.save()
             messages.success(request,"Successfully added the investigation report")
-            return HttpResponseRedirect("/show_investigation/"+report_id)
+            return HttpResponseRedirect("/add_investigation/"+report_id)
         except:
             messages.error(request,"Failed to add the investigation report")
             return HttpResponseRedirect("/add_investigation/"+report_id)
