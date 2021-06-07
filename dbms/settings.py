@@ -93,7 +93,8 @@ DATABASES = {
         'USER':'admin',
         'PASSWORD':'testpassword',
         'HOST':'localhost',
-        'PORT':'5433'
+        'PORT':'5433',
+        'CONN_MAX_AGE': 500
 
         #'ENGINE':'django.db.backends.mysql',
         #'NAME':'crime_management_system',
@@ -152,4 +153,4 @@ AUTH_USER_MODEL="crime_management.CustomUser"
 AUTHENTICATION_BACKENDS=['crime_management.EmailBackEnd.EmailBackEnd']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 import dj_database_url
-DATABASES['default'].update(dj_database_url.config(conn_max_age=500,require_ssl=True))
+DATABASES['default'].update(dj_database_url.config())
