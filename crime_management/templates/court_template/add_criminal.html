@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'court_template/header_court.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'court_template/menu_sidebar_court.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'court_template/header_desktop_court.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/add_criminal_save" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Court and Hearing details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Decision ID :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="decision_id" id="decision_id" value="{{ decision.id }}" placeholder="Text" class="form-control" disabled>
+                                                    <input type="hidden" name="decision_i" value="{{ decision.id }}">   
+                                                    <input type="hidden" name="case_id" value="{{ decision.case_id }}">                                             
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Criminal Details </strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Criminal Name :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="criminal_name" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the name of Criminal</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Criminal last working Email :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="criminal_email" placeholder="Enter Email" class="form-control">
+                                                    <small class="help-block form-text">Enter the email of Criminal</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Criminal last living Address :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="criminal_address" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the address of Criminal</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Criminal last Phone number :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="criminal_phoneno" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the phone number of accused person</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Criminal Date of Birth :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="criminal_DOB" type="date" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="SelectSexAccused" class=" form-control-label">Sex :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="criminal_sex" class="form-control">
+                                                        <option value="Null">Please select</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Criminal Image :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="criminal_image" class="form-control-file">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Charges :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="criminal_charges" rows="9" placeholder="charges" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Sentence starting Date :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="criminal_sentence_sdate" type="date" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Sentence ending Date :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="criminal_sentence_edate" type="date" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Crime Details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="SelectSexAccused" class=" form-control-label">Crime Type :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="crime_type" class="form-control">
+                                                        <option value="Null">Please select</option>
+                                                        <option value="Personal_crime">Personal_crime</option>
+                                                        <option value="Property_crime">Property_crime</option>
+                                                        <option value="Statutory_crime">Statutory_crime</option>
+                                                        <option value="Financial_crime">Financial_crime</option>
+                                                        <option value="Other_crime">Other_crime</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Crime :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="crime_name" placeholder="Text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Crime Description :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="crime_desc" rows="9" placeholder="Charges" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">Crime Date and Time :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="crime_date" type="datetime-local" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Crime Place :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="crime_place" placeholder="Text" class="form-control">
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Jail Details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="jail_id" class=" form-control-label">Jail ID:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="jail_id" id="jail_id" class="form-control">
+                                                        <option value="Null">Please select</option>
+                                                        {% for jail in jails %}
+                                                        <option value="{{jail.id}}">{{jail.id}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="addinfojail">
+
+                                            </div>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if messages %}
+                                <div class=" form-group">
+                                    {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                    <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                    {% endif %}
+                                    {% if message.tags == 'success' %}
+                                    <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER--> 
+    
+    <!--CUSTOM JSS-->
+    <script>
+        $(document).ready(function(){
+            $('#jail_id').change(function(){
+                var selectedid = $(this).children("option:selected").val();
+                
+                $.ajax({
+                    url:"{% url 'get_jail_info' %}",
+                    type:'POST',
+                    data:{jail_id:selectedid},
+                })
+                .done(function(response){
+                    var json_data=JSON.parse(response);
+                    var div_data="";
+                    div_data += `<div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Jail Name</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" name="jail_name" id="jail_name" placeholder="Text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="textarea-input" class=" form-control-label">Jail Email</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input name="jail_email" id="jail_email" type="text" rows="9" class="form-control"></input>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="textarea-input" class=" form-control-label">Jail Address</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input name="jail_address" id="jail_address" type="text" rows="9" class="form-control"></input>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="textarea" class=" form-control-label">Jailer</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input name="jail_jailer" id="jail_jailer" type="text" rows="9" class="form-control"></input>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Jail phone number</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" name="jail_phoneno" id="jail_phoneno" placeholder="Text" class="form-control">
+                                    </div>`
+                    $('#addinfojail').html(div_data);
+                    $('#jail_name').val(json_data[0].fields.jail_name);
+                    $('#jail_email').val(json_data[0].fields.jail_email);
+                    $('#jail_address').val(json_data[0].fields.address);
+                    $('#jail_jailer').val(json_data[0].fields.jailer);
+                    $('#jail_phoneno').val(json_data[0].fields.phonenumber);                     
+                })
+                .fail(function(){
+                    alert("Error in fetching")
+                })               
+
+            });
+        });
+    </script>
+    <!--END CUSTOM JSS-->
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,337 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'jail_template/header_jail.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'jail_template/menu_sidebar_jail.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'jail_template/header_desktop_jail.html' %}
+        <!--END HEADER DESKTOP-->
+
+        <!-- PAGE CONTENT-->
+        <div class="page-content--bgf7">
+            <!-- BREADCRUMB-->
+            <section class="au-breadcrumb2" style="padding-top: 2px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END BREADCRUMB-->
+
+            <!-- WELCOME-->
+            <section class="welcome p-t-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="title-4">Arrange Meeting
+                            </h1>
+                            <hr class="line-seprate">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END WELCOME-->
+
+            <!--MAIN FORM-->
+            <div class="main-content" style="padding-top: 56px;">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        {% csrf_token %}                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Criminal Details</strong>
+                                    </div>
+                                    <div class="card-body card-block">  
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="criminal_name" class=" form-control-label">Criminal_name</label>
+                                            </div>
+                                            <div class="col-12 col-md-9" >
+                                                <select name="criminal_name" id="criminal_name" class="form-control" disabled>
+                                                    <option value="{{ meeting.criminal_id }}">{{ meeting.criminal_id }}</option>
+                                                </select>
+                                            </div>
+                                        </div> 
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Criminal Image</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <img src="{{ criminal.criminal_image }}" id="criminal_image" style="max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Crime Charges</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="crime_charges" value="{{ criminal.criminal_charges }}" id="crime_charges"  class="form-control" disabled>
+                                                <input type="hidden" name="criminal_id" id="criminal_id"  class="form-control" >
+                                                <input type="hidden" name="jail_id" id="jail_id" >
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="example-date-input" class=" form-control-label">Sentence start date</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input name="sentence_start_date" value="{{ criminal.criminal_sentence_start|date:'Y-m-d' }}" id="sentence_start_date" type="date" rows="9" placeholder="Date" class="form-control" disabled></input>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="example-date-input" class=" form-control-label">Sentence end Date</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input name="sentence_end_date" value="{{ criminal.criminal_sentence_end|date:'Y-m-d' }}" id="sentence_end_date" type="date" rows="9" placeholder="Date" class="form-control" disabled></input>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="card-footer">
+                                        <a class="btn btn-primary" href="/view_criminal_details/{{ meeting.criminal_id }}" role="button">View Criminal Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Meeting Person Details</strong>
+                                    </div>
+                                    <div class="card-body card-block">                                         
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Name</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="meeting_name" value="{{ meeting.meeting_name }}" placeholder="Text" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="email-input" class=" form-control-label">Email</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="email" name="meeting_email" value="{{ meeting.meeting_email }}" placeholder="Enter Email" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="example-date-input" class=" form-control-label">Date Of Birth</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input name="meeting_DOB" type="date" value="{{ meeting.meeting_DOB|date:'Y-m-d' }}" rows="9" placeholder="Date" class="form-control" disabled></input>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="meeting_sex" class=" form-control-label" >Sex</label>
+                                            </div>
+                                            <div class="col-12 col-md-9" >
+                                                <select name="meeting_sex" class="form-control" disabled>
+                                                    <option value="{{ meeting.meeting_sex }}" >{{ meeting.meeting_sex }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Your address</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="meeting_address" placeholder="Text" value="{{ meeting.meeting_address }}" class="form-control" disabled>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Your phone number</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="meeting_phonenumber" value="{{ meeting.meeting_phonenumber }}" placeholder="Text" class="form-control" disabled>
+                                            </div>
+                                        </div>                                                                                        
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="file-input" class=" form-control-label">Your image</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <img src = "{{ meeting.meeting_image }}" style="max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;" >
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Your relation to criminal</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="criminal_relation" value="{{ meeting.criminal_relation }}" id="criminal_relation"  class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="textarea-input" class=" form-control-label">Reason to meet</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <textarea name="criminal_reason" id="criminal_reason" rows="9" placeholder="Charges" class="form-control" disabled>{{ meeting.criminal_reason }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="example-date-input" class=" form-control-label">meeting Preferred Date</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input name="meeting_preferred_date" value="{{ meeting.meeting_date|date:'Y-m-d' }}" type="date" rows="9" placeholder="Date" class="form-control" disabled></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Occupation details</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Occupation</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="occupation_type" value="{{ meeting.occupation_type }}" placeholder="Text" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Occupation/company/entity name</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="occupation_name" value="{{ meeting.occupation_name }}" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Occupation/company/entity address</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="occupation_address" value="{{ meeting.occupation_address }}"  class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="text-input" class=" form-control-label">Occupation/company/entity phone number</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="occupation_phonenumber" value="{{ meeting.occupation_phonenumber }}"  class="form-control" disabled>
+                                            </div>
+                                        </div>                      
+                                        {% if messages %}
+                                        <div class=" form-group">
+                                            {% for message in messages %}
+                                            {% if message.tags == 'error' %}
+                                            <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                            {% endif %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        </div>
+                                        <div class="card-footer">
+                                            <a class="btn btn-primary" href="/meeting_grant/{{ meeting.id }}" role="button">Grant Request</a>
+                                            <a class="btn btn-danger" href="/meeting_reject/{{ meeting.id }}" role="button">Reject</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--END MAIN FORM-->
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

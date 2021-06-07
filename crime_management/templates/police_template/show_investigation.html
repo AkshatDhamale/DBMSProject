@@ -1,0 +1,354 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'police_template/header_police.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'police_template/menu_sidebar.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'police_template/header_desktop.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/edit_investigation/{{ report.id }}" method="POST" class="form-horizontal">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Report legitimacy</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="legit_report" class=" form-control-label">Is the Report Legit :</label>
+                                                    <input type="hidden" name="report_id" value="{{ report.id }}">
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="legit_report" class="form-control" disabled id="legit_report">
+                                                        <option value="{{ investigation_report.legit_report }}" selected>{{ investigation_report.legit_report }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if investigation_report.legit_report == "Yes" %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Report Scene details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Report Scene address :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="report_scene_address" placeholder="{{ investigation_report.scene_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">First date of visiting scene :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="report_scene_firstdate" type="date" rows="9" value="{{ investigation_report.scene_firstvisited|date:'Y-m-d' }}" placeholder="{{ investigation_report.scene_firstvisited|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Report scene description :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="report_scene_description" rows="9" placeholder="{{ investigation_report.scene_description }}" class="form-control" disabled>{{ investigation_report.scene_description }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="legit_report" class=" form-control-label">First officer to investigate scene :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="first_officer" class="form-control" disabled>
+                                                        <option value="{{ investigation_report.first_officer }}" selected>{{ investigation_report.first_officer }}</option>                            
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="assisting_officer" class=" form-control-label">Assisting officer :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="assisting_officer" class="form-control" disabled>
+                                                        <option value="{{ investigation_report.assisting_officer }}">{{ investigation_report.assisting_officer}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Main Witness details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Witness name :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_witness_name" placeholder="{{ investigation_report.main_witness_name }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main witness email :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_witness_email" placeholder="{{ investigation_report.main_witness_email }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Witness address :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_witness_address" placeholder="{{ investigation_report.main_witness_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Witness Phone Number :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_witness_phoneno" placeholder="{{ investigation_report.main_witness_phone_no }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">Main Witness DOB :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="main_witness_DOB" type="date" rows="9" value="{{ investigation_report.main_witness_DOB|date:'Y-m-d' }}" placeholder="{{ investigation_report.main_witness_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Main Witness Description :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="main_witness_desc" rows="9" placeholder="{{ investigation_report.main_witness_description }}" class="form-control" disabled>{{ investigation_report.main_witness_description }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Main Witness Blames :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="main_witness_blame" rows="9" placeholder="{{ investigation_report.main_witness_blame }}" class="form-control" disabled>{{ investigation_report.main_witness_blame }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Main Suspect details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Suspect name :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_suspect_name" placeholder="{{ investigation_report.main_suspect_name }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Suspect email :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_suspect_email" placeholder="{{ investigation_report.main_suspect_email }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Suspect address :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_suspect_address" placeholder="{{ investigation_report.main_suspect_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Main Suspect Phone Number :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="main_suspect_phoneno" placeholder="{{ investigation_report.main_suspect_phone_no }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">Main Suspect DOB :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="main_suspect_DOB" type="date" rows="9" value="{{ investigation_report.main_suspect_DOB|date:'Y-m-d' }}" placeholder="{{ investigation_report.main_suspect_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Main Witness Description :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="main_suspect_desc" rows="9" placeholder="{{ investigation_report.main_suspect_description }}" class="form-control" disabled>{{ investigation_report.main_suspect_description }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Main Suspect Defense :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="main_suspect_defense" rows="9" placeholder="{{ investigation_report.main_suspect_defense }}" class="form-control" disabled>{{ investigation_report.main_suspect_defense }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% elif investigation_report.legit_report == 'No' %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Legitimacy Reason</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Reason :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="legit_reason" id="legit_reason" rows="9" placeholder="{{ investigation_report.legit_reason }}" class="form-control" disabled>{{ investigation_report.legit_reason }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                                                                                    
+                            {% if messages %}
+                            <div class=" form-group">
+                                {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                {% endif %}
+                                {% if message.tags == 'success' %}
+                                <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Edit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER-->
+
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

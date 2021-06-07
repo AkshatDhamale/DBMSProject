@@ -1,0 +1,454 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'doctor_template/header_doctor.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'doctor_template/menu_sidebar_doctor.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'doctor_template/header_desktop_doctor.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/add_health_record_save" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Doctor Details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="doctor_id" class=" form-control-label">Doctor ID: </label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="doctor_id" id="doctor_id" class="form-control" disabled >
+                                                        <option value='{{ doctor.id }}'>{{ doctor.id }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Doctor Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="doctor_name" value="{{ username }}" placeholder="Text" class="form-control" disabled >
+                                                    <input type="hidden" name="doctor_i" value="{{ doctor.id }}">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Doctor Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="doctor_email" value="{{ email }}" placeholder="Text" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Doctor Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="doctor_address" value="{{ doctor.address }}" placeholder="Text" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Doctor Phone Number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="doctor_phonenumber" value="{{ doctor.phonenumber }}" placeholder="Text" class="form-control" disabled>
+                                                </div>
+                                            </div>                                                                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Criminal Details </strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="criminal_id" class=" form-control-label">Criminal ID: </label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="criminal_id" id="criminal_id" class="form-control" >
+                                                        <option value='0'>please select</option>
+                                                        {% for criminal in criminals %}
+                                                        <option value="{{ criminal.id }}">{{ criminal.id }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="appendcriminalinfo">
+
+                                            </div>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                    
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Health History:</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Previous Diseases or Surgeries</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="previous_diseases" id="previous_diseases" rows="9" class="form-control"></textarea>
+                                                    <small class="form-text text-muted">Type NA if no such diseases</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Any Hereditary Diseases or Genetic disorders </label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="family_diseases" id="family_diseases" rows="9" class="form-control"></textarea>
+                                                    <small class="form-text text-muted">Type NA if no such diseases</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Any Allergies</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="allergies" id="allergies" rows="9" class="form-control"></textarea>
+                                                    <small class="form-text text-muted">Type NA if no such allergies</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Current Diseases (if Any)</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="current_diseases" id="current_diseases" rows="9" class="form-control"></textarea>
+                                                    <small class="form-text text-muted">Type NA if no such diseases</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Current Medications (if Any)</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="current_medications" id="current_medications" rows="9" class="form-control"></textarea>
+                                                    <small class="form-text text-muted">Type NA if no such medications</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>General Body Checkup</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Height :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="height" id="height" placeholder="Text" class="form-control" >
+                                                    <small class="form-text text-muted">in cm</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Weight :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="weight" id="weight" placeholder="Text" class="form-control" >
+                                                    <small class="form-text text-muted">in kg</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">BMI :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="BMI" id="BMI" placeholder="Text" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">BP :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="BP" id="BP" placeholder="Text" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Hearing :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Hearing" id="Hearing" placeholder="Text" class="form-control" >
+                                                </div>
+                                            </div>  
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Vision :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Vision" id="Vision" placeholder="Text" class="form-control" >
+                                                </div>
+                                            </div>  
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Dental :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Dental" id="Dental" placeholder="Text" class="form-control" >
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Laboratory Results :</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">X-Ray result</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="x_ray_results" id="x_ray_results" rows="9" class="form-control"></textarea>
+                                                </div>
+                                            </div> 
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">X-Ray Image</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="x_ray_report" class="form-control-file">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Abornmalities or Disorders Mentally</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="abornmalities" id="abornmalities" rows="9" class="form-control"></textarea>                                                    
+                                                    <small class="form-text text-muted">Type NA if not observed</small>
+                                                </div>
+                                            </div>     
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Mental Report</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="mental_report" id="mental_report" rows="9" class="form-control"></textarea>
+                                                </div>
+                                            </div>   
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Signature</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="signature" class="form-control-file">
+                                                </div>
+                                            </div>                                                                                                                                                                  
+                                            {% if messages %}
+                                            <div class=" form-group">
+                                                {% for message in messages %}
+                                                {% if message.tags == 'error' %}
+                                                <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                                {% endif %}
+                                                {% if message.tags == 'success' %}
+                                                <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                                {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-dot-circle-o"></i>  Submit
+                                                </button>
+                                                <button type="reset" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-ban"></i> Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER--> 
+
+    <!--CUSTOM JSS-->
+    <script>
+        $(document).ready(function(){
+            $('#criminal_id').change(function(){
+                var selectedid = $(this).children("option:selected").val();
+                
+                $.ajax({
+                    url:"{% url 'doc_criminal_info' %}",
+                    type:'POST',
+                    data:{criminal_id:selectedid},
+                })
+                .done(function(response){
+                    var json_data=JSON.parse(response);
+                    var div_data="";
+                    console.log(json_data);
+                    div_data += `<div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Criminal Name :</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" name="criminal_name" id="criminal_name" placeholder="Text" class="form-control" disabled>
+                                        <input type="hidden" name="jail_id" id="jail_id" >
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="example-date-input" class=" form-control-label">Criminal Date of Birth :</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input name="criminal_DOB" id="criminal_DOB" type="date" rows="9"  placeholder="Date" class="form-control" disabled ></input>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="file-input" class=" form-control-label">Criminal Image :</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <img id="criminal_image" src="" style="margin-top: 10px; max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Criminal sentence Duration :</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" name="criminal_sentence_duration" id="criminal_sentence_duration" placeholder="Text" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="SelectSexAccused" class=" form-control-label">Sex :</label>
+                                    </div>
+                                    <div class="col-12 col-md-9" >
+                                        <input type="text" name="criminal_sex" id="criminal_sex" placeholder="Text" class="form-control" disabled>
+                                    </div>
+                                </div>`
+                    $('#appendcriminalinfo').html(div_data);  
+                    $('#criminal_name').val(json_data[0].fields.criminal_name);
+                    $('#jail_id').val(json_data[0].fields.jail_id);
+                    $('#criminal_DOB').val(json_data[0].fields.criminal_DOB);
+                    $('#criminal_image').attr("src",json_data[0].fields.criminal_image);
+                    $('#criminal_sentence_duration').val(json_data[0].fields.criminal_sentence_duration);
+                    $('#criminal_sex').val(json_data[0].fields.criminal_sex);
+                })
+                .fail(function(){
+                    alert("Error in fetching")
+                })               
+
+            });
+        });
+    </script>
+    <!--END CUSTOM JSS-->
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

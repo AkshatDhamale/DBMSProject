@@ -1,0 +1,533 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'police_template/header_police.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'police_template/menu_sidebar.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'police_template/header_desktop.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/Charge_Sheet_save" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Accused person</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Charging Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <p class="form-control-static">{{ username }}</p>
+                                                    <input type="hidden" name="charging_officer" value="{{ username }}"class="form-control">
+                                                    <input type="hidden" name="report_id" value="{{ report.id }}"class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of the person</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Accused_name" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the name</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Accused_address" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the address of accused person</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Accused_phonenumber" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the phone number of accused person</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="Accused_email" placeholder="Enter Email" class="form-control">
+                                                    <small class="help-block form-text">Enter the email of accused person</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Accused_DOB" type="date" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="SelectSexAccused" class=" form-control-label">Sex</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Accused_sex" class="form-control">
+                                                        <option value="Null">Please select</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Details of charges against the accused person</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Accused_Charges" rows="9" placeholder="Charges" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Under what law</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Accused_law" class="form-control">
+                                                        <option value="0">Please select</option>
+                                                        <option value="1">State</option>
+                                                        <option value="2">Act</option>
+                                                        <option value="3">CWealth</option>
+                                                        <option value="4">Reg</option>
+                                                        <option value="5">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Type of Offense</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Accused_offense" class="form-control">
+                                                        <option value="0">Please select</option>
+                                                        <option value="1">Summary offense</option>
+                                                        <option value="2">Indictable offense</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Act or Regulation No.</label>
+                                                </div>
+                                                <div class="col-12 col-md-3">
+                                                    <input type="text" name="Accused_act" placeholder="Text" class="form-control">
+                                                </div>
+                                                <div class="col col-md-2">
+                                                    <label for="text-input" class=" form-control-label">Section/Clause</label>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <input type="text" name="Accused_section" placeholder="Text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Image</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="Accused_image" class="form-control-file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Informant (Person accused by)</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of informant</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Informant_name" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the name of informant</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="SelectSexInformant" class=" form-control-label">Sex</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Informant_sex" class="form-control">
+                                                        <option value="Null">Please select</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Informant_DOB" type="date" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Informant_address" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the Address of informant</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Informant_Phonenumber" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the phone number of informant</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="Informant_email" placeholder="Enter Email" class="form-control">
+                                                    <small class="help-block form-text">Enter the email of informant</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Description of offense according to Informant</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Informant_description" rows="9" placeholder="Description" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of initial report by Informant</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Initial_report" type="date" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Image</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="Informant_image" class="form-control-file">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Signature</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="Informant_signature" class="form-control-file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Investigation details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Reporting Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Reporting_officer" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the name of Reporting Officer</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Investigation Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Investigation_officer" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the name of Investigation Officer</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Assisting Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Assisting_officer" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the name of Assisting Officer</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Issued at</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Issued_at" placeholder="Text" class="form-control">
+                                                    <small class="form-text text-muted">Enter the place where the report was Issued</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">Issued when</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Issued_when" type="datetime-local" rows="9" placeholder="Date" class="form-control"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Investigation Details</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Investigation_details" rows="9" placeholder="Charges" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Theories</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Theories" id="select" class="form-control" onchange=appendTheories()>
+                                                        <option value="0">NA/0</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="div">
+
+                                            </div>
+                                            <div class="row form-group" style="margin-top: 20px;">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Witnesses</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Witnesses" id="selectwitness" class="form-control" onchange=appendWitnesses()>
+                                                        <option value="0">NA/0</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="div2">
+
+                                            </div>
+                                            <div class="row form-group" style="margin-top: 20px;">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Suspects</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Suspects" id="selectsuspect" class="form-control" onchange=appendSuspects()>
+                                                        <option value="0">NA/0</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="div3">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if messages %}
+                            <div class=" form-group">
+                                {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                {% endif %}
+                                {% if message.tags == 'success' %}
+                                <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-ban"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER-->
+
+    <!--CUSTOM JSS-->
+    <script>
+        function appendTheories() {
+            var x = document.getElementById("select").value;
+            var d = document.getElementById('div');
+            var output = '';
+            var i = 0;
+            for (i = 0; i < x; i++){
+                output +=  `<div class=row form-group" style="margin-top: 10px;">
+                                <div class="col col-md-3">
+                                    <label for="textarea-input" class=" form-control-label">Theory ${i+1} </label>                            
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="Theory_${i+1}" rows="9" placeholder="Charges" class="form-control"></textarea>
+                                </div>
+                            </div>`;
+            }
+        d.innerHTML = output;
+        }
+        
+        function appendWitnesses() {
+            var x = document.getElementById("selectwitness").value;
+            var d = document.getElementById('div2');
+            var output = '';
+            var i = 0;
+            for (i = 0; i < x; i++){
+                output +=  `<div class="row form-group" >
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Witness ${i+1}</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" name="Witness_${i+1}" placeholder="Text" class="form-control">
+                                </div>
+                            </div>`;
+            }
+        d.innerHTML = output;
+        }
+
+        function appendSuspects() {
+            var x = document.getElementById("selectsuspect").value;
+            var d = document.getElementById('div3');
+            var output = '';
+            var i = 0;
+            for (i = 0; i < x; i++){
+                output +=  `<div class="row form-group" >
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Suspects ${i+1}</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" name="Suspect_${i+1}" placeholder="Text" class="form-control">
+                                </div>
+                            </div>`;
+            }
+        d.innerHTML = output;
+        }
+    </script>
+    <!--END CUSTOM JSS-->
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

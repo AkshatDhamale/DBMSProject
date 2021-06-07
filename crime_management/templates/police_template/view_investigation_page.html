@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'police_template/header_police.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'police_template/menu_sidebar.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'police_template/header_desktop.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+        <div class="main-content">
+            <div class="scrollmenu">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form  method="POST" class="form-horizontal" >
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive table--no-card m-b-30">
+                                        <h3 class="title-3 m-b-30">
+                                            <i class="zmdi zmdi-account-calendar"></i>All Investigation</h3>
+                                        <div class="table-data__tool">
+                                            <div class="table-data__tool-left">
+                                                <div class="rs-select2--light rs-select2--md">
+                                                    <select class="js-select2" id="max_rows" name="max_rows">
+                                                        <option value="0" selected="selected">Max Rows</option>
+                                                        <option {% if rows == '5' %} selected {% endif %} value="5">5</option>
+                                                        <option {% if rows == '10' %} selected {% endif %} value="10">10</option>
+                                                        <option {% if rows == '20' %} selected {% endif %} value="20">20</option>
+                                                        <option {% if rows == '30' %} selected {% endif %} value="30">30</option>
+                                                        <option {% if rows == '40' %} selected {% endif %} value="40">40</option>
+                                                        <option {% if rows == '50' %} selected {% endif %} value="50">50</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                            </div>
+                                            <div class="table-data__tool-right">
+                                                <input class="au-input au-input--xl" type="text" name="search" id="searchbyletter" placeholder="Search for Investigation details..." style="margin-right:10px;"/>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2" id="myTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th id="ID">ID</th>
+                                                        <th >Report by</th>
+                                                        <th >filed at</th>
+                                                        <th id="event">event type</th>
+                                                        <th >report against</th>
+                                                        <th>status</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="Investigationtable">
+                                                {% for rep in report %}
+                                                    <tr class="tr-shadow">
+                                                        <td>{{ rep.id }}</td>                                                
+                                                        <td>{{ rep.report_by_type }}</td>
+                                                        <td style="padding-left: 2px;">{{ rep.created_at }}</td>
+                                                        <td>{{ rep.eventtype }}</td>
+                                                        <td>
+                                                            <span>{{ rep.reportagainst }}</span>
+                                                        </td>
+                                                        {% if rep.status == "Pending" %}
+                                                            <td  class="status", style="color: #ffc107;">{{ rep.status }}</td>
+                                                        {% elif rep.status == "Filed" %}
+                                                            <td  class="status", style="color: green;">{{ rep.status }}</td>
+                                                        {% elif rep.status == "Viewed" %}
+                                                            <td  class="status", style="color: blue;">{{ rep.status }}</td>
+                                                        {% else %}
+                                                            <td  class="status", style="color: red;">{{ rep.status }}</td>
+                                                        {% endif %}
+                                                        <td class="text-right">
+                                                            <a href="add_investigation/{{ rep.id }}" class="au-btn au-btn-icon au-btn--green au-btn--small" style="color:white; padding-left: 10px;">
+                                                            <i style="color:white;"></i>Investigation </button>
+                                                        </td>
+                                                        <td>
+                                                            <div class="circle" ></div>
+                                                            <a href="edit_investigation/{{ rep.id }}" class="zmdi zmdi-edit" style="zoom: 1.5;">                                                    
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="spacer"></tr> 
+                                                {% endfor %}                                           
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="user-data__footer">
+                                            {% if p_number == 1 %}
+                                                <button formaction="/view_investigation_all" type="submit" class="au-btn au-btn-load" >Previous Page</button>
+                                            {% else %}
+                                                <button formaction="/view_investigation_all/page/{{ p_number|add:-1 }}" type="submit" class="au-btn au-btn-load" >Previous Page</button>
+                                            {% endif %}
+                                            {% if len_reports > rows %}
+                                                <button formaction="/view_investigation_all/page/{{ p_number|add:1 }}" type="submit" class="au-btn au-btn-load" >Next Page</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER-->
+
+    <script>
+        function sortTable(f,n){
+            var rows = $('#myTable tbody  tr').get();
+
+            rows.sort(function(a, b) {
+
+                var A = getVal(a);
+                var B = getVal(b);
+
+                if(A < B) {
+                    return -1*f;
+                }
+                if(A > B) {
+                    return 1*f;
+                }
+                return 0;
+            });
+
+            function getVal(elm){
+                var v = $(elm).children('td').eq(n).text().toUpperCase();
+                if($.isNumeric(v)){
+                    v = parseInt(v,10);
+                }
+                return v;
+            }
+
+            $.each(rows, function(index, row) {
+                $('#myTable').children('tbody').append(row);
+            });
+        }
+        var f_sl = 1; // flag to toggle the sorting order
+        var f_nm = 1; // flag to toggle the sorting order
+        $("#ID").click(function(){
+            f_sl *= -1; // toggle the sorting order
+            var n = $(this).prevAll().length;
+            sortTable(f_sl,n);
+        });
+        $("#event").click(function(){
+            f_nm *= -1; // toggle the sorting order
+            var n = $(this).prevAll().length;
+            sortTable(f_nm,n);
+        });
+
+
+
+        
+
+
+    </script>
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

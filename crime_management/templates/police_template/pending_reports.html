@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="animsition">
+    <div class="table-responsive m-b-40">
+        <table class="table table-borderless table-data3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Reported By</th>
+                    <th>Reported against</th>
+                    <th>Event</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>                                    
+                {% for rep in reps %}
+                <tr>
+                    <td>{{ rep.id }}</td>
+                    <td>{{ rep.report_by_type }}</td>
+                    <td>{{ rep.reportagainst }}</td>
+                    <td>{{ rep.eventtype }}</td>
+                    <td>
+                        <a href="edit_report/{{ rep.id }}" class="au-btn au-btn-icon au-btn--blue au-btn--small" style="color:white;">
+                        <i class="zmdi zmdi-view-list-alt" style="color:white;"></i>View Report</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> 
+
+</body>
+
+</html>
+<!-- end document-->

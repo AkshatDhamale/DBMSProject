@@ -1,0 +1,580 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'court_template/header_court.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'court_template/menu_sidebar_court.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'court_template/header_desktop_court.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/Charge_Sheet_save" method="POST" class="form-horizontal">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Accused person</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Charging Officer :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <p class="form-control-static">{{ chargesheet.charging_officer }}</p>
+                                                    <input type="hidden" name="charging_officer" value="{{ chargesheet.charging_officer }}"class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of the person</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="static" name="Accused_name" placeholder="Text" value="{{ chargesheet.Accused_name }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Accused_address" value="{{ chargesheet.Accused_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Accused_phonenumber"  value="{{ chargesheet.Accused_phone_no }}" class="form-control" disabled>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9"> 
+                                                    <input type="email" name="Accused_email" placeholder="Enter Email" value="{{ chargesheet.Accused_email }}" class="form-control" disabled> 
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Accused_DOB" type="date" rows="9" placeholder="Date" value="{{ chargesheet.Accused_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="SelectSexAccused" class=" form-control-label">Sex</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Accused_sex" class="form-control" disabled>
+                                                        <option value="{{ chargesheet.Accused_sex }}" selected>{{ chargesheet.Accused_sex }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Details of charges against the accused person</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Accused_Charges" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Accused_Charges }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Under what law</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Accused_law" class="form-control" disabled>
+                                                        <option value="{{ chargesheet.Accused_underwhatlaw }}" selected>{{ chargesheet.Accused_underwhatlaw }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Type of Offense</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Accused_offense" class="form-control" disabled>
+                                                        <option value="{{ chargesheet.Accused_typeofoffense }}">{{ chargesheet.Accused_typeofoffense }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Act or Regulation No.</label>
+                                                </div>
+                                                <div class="col-12 col-md-3">
+                                                    <input type="text" name="Accused_act"  value="{{ chargesheet.Accused_Act }}" class="form-control" disabled>
+                                                </div>
+                                                <div class="col col-md-2">
+                                                    <label for="text-input" class=" form-control-label">Section/Clause</label>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <input type="text" name="Accused_section" value="{{ chargesheet.Accused_section }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Image</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="Accused_image" class="form-control-file" disabled>
+                                                    <img src="{{ chargesheet.Accused_image }}" style="margin-top: 10px; max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Informant (Person accused by)</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of informant</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Informant_name" value="{{ chargesheet.Informant_name }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="SelectSexInformant" class=" form-control-label">Sex</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Informant_sex" class="form-control" disabled>
+                                                        <option value="{{ chargesheet.Informant_sex }}" selected>{{ chargesheet.Informant_sex }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Informant_DOB" type="date" rows="9" value="{{ chargesheet.Informant_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Informant_address" value="{{ chargesheet.Informant_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Informant_Phonenumber" value="{{ chargesheet.Informant_phone_no }}" class="form-control" disabled>
+                                                    <small class="form-text text-muted">Enter the phone number of informant</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="Informant_email" value="{{ chargesheet.Informant_email }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Description of offense according to Informant</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Informant_description" rows="9" class="form-control" disabled>{{ chargesheet.Informant_description }}"</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of initial report by Informant</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Initial_report" type="date" rows="9" value="{{ chargesheet.Informant_initial_report|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Image</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="Informant_image" class="form-control-file" disabled>
+                                                    <img src="{{ chargesheet.Informant_image }}" style="margin-top: 10px; max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">                            
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Signature</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="Informant_signature" class="form-control-file" disabled>
+                                                    <img src="{{ chargesheet.Informant_signature }}" style="margin-top: 10px; max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Investigation details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Reporting Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Reporting_officer" value="{{ chargesheet.Reporting_officer }}" class="form-control" disabled>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Investigation Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Investigation_officer" value="{{ chargesheet.Investigation_officer }}" class="form-control" disabled>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Assisting Officer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Assisting_officer" value="{{ chargesheet.Assisting_officer }}" class="form-control" disabled>
+                                                    <small class="form-text text-muted">Enter the name of Assisting Officer</small>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Issued at</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="Issued_at" value="{{ chargesheet.Issued_at }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">Issued when</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="Issued_when" type="datetime-local" rows="9" value="{{ chargesheet.Issued_when|date:'Y-m-d H:i' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Investigation Details</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Investigation_details" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Investigation_details }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Theories</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Theories" id="select" class="form-control" disabled>
+                                                        <option value="{{ chargesheet.Theories }}" selected>{{ chargesheet.Theories }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {% if chargesheet.Theory1 != None %}
+                                            <div class=row form-group" style="margin-top: 10px;">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Theory 1 </label>                            
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Theory" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Theory1 }}</textarea>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Theory2 != None %}
+                                            <div class=row form-group" style="margin-top: 10px;">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Theory 2 </label>                            
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Theory" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Theory2 }}</textarea>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Theory3 != None %}
+                                            <div class=row form-group" style="margin-top: 10px;">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Theory 3 </label>                            
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Theory" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Theory3 }}</textarea>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Theory4 != None %}
+                                            <div class=row form-group" style="margin-top: 10px;">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Theory 4 </label>                            
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Theory" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Theory4 }}</textarea>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Theory5 != None %}
+                                            <div class=row form-group" style="margin-top: 10px;">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Theory 5 </label>                            
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="Theory" rows="9" placeholder="Charges" class="form-control" disabled>{{ chargesheet.Theory5 }}</textarea>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+                                            <div class="row form-group" style="margin-top: 20px;">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Witnesses</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Witnesses" id="selectwitness" class="form-control" disabled >
+                                                        <option value="{{ chargesheet.Witnesses }}">{{ chargesheet.Witnesses }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {% if chargesheet.Witness1 != None %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Witness 1</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text"  value="{{ chargesheet.Witness1 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Witness2 != None %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Witness 2</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text"  value="{{ chargesheet.Witness1 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Witness3 != None %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Witness 3</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text"  value="{{ chargesheet.Witness1 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Witness4 != None %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Witness 4</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text"  value="{{ chargesheet.Witness1 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Witness5 != None %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Witness 5</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text"  value="{{ chargesheet.Witness1 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+                                            <div class="row form-group" style="margin-top: 20px;">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Suspects</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="Suspects" id="selectsuspect" class="form-control" disabled >
+                                                        <option value="{{ chargesheet.Suspects }}">{{ chargesheet.Suspects }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {% if chargesheet.Suspect1 %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Suspects 1</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" value="{{ chargesheet.Suspect1 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Suspect2 %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Suspects 2</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" value="{{ chargesheet.Suspect2 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Suspect3 %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Suspects 3</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" value="{{ chargesheet.Suspect3 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Suspect4 %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Suspects 4</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" value="{{ chargesheet.Suspect4 }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% if chargesheet.Suspect5 %}
+                                            <div class="row form-group" >
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Suspects 5</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" value="{{ chargesheet.Suspect5 }}" class="form-control" disabled> 
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if messages %}
+                                <div class=" form-group">
+                                    {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                    <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                    {% endif %}
+                                    {% if message.tags == 'success' %}
+                                    <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                </div>
+                            <div class="card-footer">
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER-->
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

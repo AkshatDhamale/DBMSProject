@@ -1,0 +1,61 @@
+{% load static %}
+<div class="logo">
+    <a href="#">
+        <img src="{% static "images/icon/court_logo.png" %}" alt="Cool Admin" />
+    </a>
+</div>
+<div class="menu-sidebar__content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar__list">
+            <li class="active">
+                <a href="/police_home">
+                    <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-list-alt"></i>Manage Cases</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_all_cases">View Cases</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-suitcase"></i>Manage Attorneys</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_attorney">View all Attorney</a>
+                    </li>
+                    <li>
+                        <a href="/add_attorney">Add Attorney</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-legal"></i>Manage Judges</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_judge">View all Judges</a>
+                    </li>
+                    <li>
+                        <a href="/add_judge">Add Judge</a>
+                    </li>
+                </ul>
+            </li>              
+            <li class="has-sub">
+                <a href="/view_chargesheets">
+                    <i class="fas fa-file-text"></i>Charge Sheets</a>              
+            </li>
+            <li>
+                <a href="/view_all_criminals">
+                    <i class="fas fa-users"></i>Criminals</a>
+            </li>
+            <li>
+                <a href="/view_all_releases">
+                    <i class="fas fa-users"></i>Releases</a>
+            </li>            
+        </ul>
+    </nav>
+</div>

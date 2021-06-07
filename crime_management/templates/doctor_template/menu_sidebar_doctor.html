@@ -1,0 +1,40 @@
+{% load static %}
+<div class="logo">
+    <a href="#">
+        <img src="{% static "images/doctor/doctor_header.png" %}" alt="Cool Admin" />
+    </a>
+</div>
+<div class="menu-sidebar__content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar__list">
+            <li class="active">
+                <a href="/doctor_home">
+                    <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-search"></i>Manage Health Records</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_all_health_record">View All Health Records</a>
+                    </li>
+                    <li>
+                        <a href="/add_health_record">Add Health Record</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-search"></i>Monthly Health checkup</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/add_court">View All Health Checkups</a>
+                    </li>
+                    <li>
+                        <a href="/remove_court">Add</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

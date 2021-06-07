@@ -1,0 +1,505 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+    
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'court_template/header_court.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'court_template/menu_sidebar_court.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'court_template/header_desktop_court.html' %}
+        <!--END HEADER DESKTOP-->
+        
+        <!--MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/edit_case/{{ case.id }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Court and Hearing details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Court Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="court_name" value="{{ case.court_name }}"class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Court Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="court_address" value="{{ case.court_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="court_type" class=" form-control-label">Court Type</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="court_type" class="form-control" disabled>
+                                                        <option value="{{case.court_type}}">{{case.court_type}}</option>                                                       
+                                                    </select>
+                                                </div>
+                                            </div>                                            
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">First Hearing Date and Time</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="first_hearing" type="datetime" value="{{ case.first_hearing|date:'Y-m-d H:i' }}" rows="9" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-datetime-local-input" class=" form-control-label">Final Hearing Date and Time</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="final_hearing" value="{{ case.final_hearing|date:'Y-m-d H:i' }}" type="datetime" rows="9" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Defense Attorney Details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Attorney ID :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="def_att_id" id="def_att_id" class="form-control" disabled>
+                                                        <option value="{{ case.def_id }}">{{ case.def_id }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of Defense Attorney</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_att_name" value='{{ case.def_name }}' id="pros_att_name" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="pros_att_email" id="pros_att_email" value="def_email" placeholder="Enter Email" class="form-control" disabled>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_att_address" id="pros_att_address" value="{{ case.def_address }}" placeholder="Text" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_att_phonenumber" id="pros_att_phonenumber" value="{{case.def_phone_no}}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="pros_att_DOB" id="pros_att_DOB" value="{{case.def_DOB|date:'Y-m-d'}}" type="date" rows="9" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Prosecuting Attorney Details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label"> Attorney ID :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="pros_att_id" id="pros_att_id" class="form-control" disabled>
+                                                        <option value="0">Please select</option>
+                                                        <option value="{{ case.pros_id }}">{{ case.pros_id }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of Defense Attorney</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_att_name" value='{{case.pros_name}}' id="pros_att_name" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="pros_att_email" id="pros_att_email" value="{{case.pros_email}}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_att_address" id="pros_att_address" value="{{case.pros_address}}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_att_phonenumber" id="pros_att_phonenumber" value="{{case.pros_phone_no}}" class="form-control" disabled>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="pros_att_DOB" id="pros_att_DOB"  type="date" rows="9" value="{{ case.pros_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Judge Details</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Judge ID :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="get_judge_id" id="get_judge_id" class="form-control" disabled>
+                                                        <option value="0">Please select</option>
+                                                        <option value="{{ case.judge_id }}">{{ case.judge_id }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name of Defense Attorney</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="judge_name" value='{{ case.judge_name }}' id="judge_name" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="judge_email" id="judge_email" value="{{ case.judge_email }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="judge_address" id="judge_address" value="{{ case.judge_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="judge_phonenumber" id="judge_phonenumber" value="{{ case.judge_phone_no }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="judge_DOB" id="judge_DOB"  type="date" rows="9" value="{{ case.judge_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Defending Person Details </strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="def_person_name" value="{{ case.def_person_name }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="def_person_email" value="{{ case.def_person_email }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="def_person_address" value="{{ case.def_person_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="def_person_phoneno" value="{{ case.def_person_phone_no }}" class="form-control" disabled> 
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="def_person_DOB" type="date" rows="9" value="{{ case.def_person_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Judge ID :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="def_person_crime" id="def_person_crime" class="form-control" disabled>
+                                                        <option value="{{case.def_crime_type}}">{{case.def_crime_type}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Charges Against:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="def_person_charges" rows="9" class="form-control" disabled>{{ case.def_person_charges }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Image of defending person :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="def_person_image" class="form-control-file" style="margin-bottom: 10px;" disabled>
+                                                    <img src="{{ case.def_person_image }}" style="max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Prosecuting Person Details </strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_person_name" value="{{ case.pros_person_name }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" name="pros_person_email" value="{{ case.pros_person_email }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_person_address" value="{{ case.pros_person_address }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone number :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="pros_person_phoneno" value="{{ case.pros_person_phone_no }}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="pros_person_DOB" type="date" rows="9" value="{{ case.pros_person_DOB|date:'Y-m-d' }}" class="form-control" disabled></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Charges accused of :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="pros_person_charges" rows="9" class="form-control" disabled>{{ case.pros_person_desc }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Image of defending person :</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="pros_person_image" class="form-control-file" style="margin-bottom: 10px;" disabled>
+                                                    <img src="{{ case.pros_person_image }}" style="max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                            
+                                {% if messages %}
+                                <div class=" form-group">
+                                    {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                    <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                    {% endif %}
+                                    {% if message.tags == 'success' %}
+                                    <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Edit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END MAIN CONTENT-->
+    </div>
+    <!--END PAGE CONTAINER-->
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

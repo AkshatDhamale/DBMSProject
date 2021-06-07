@@ -1,0 +1,79 @@
+{% load static %}
+
+<header class="header-desktop3 d-none d-lg-block">
+    <div class="section__content section__content--p35">
+        <div class="header3-wrap">
+            <div class="header__logo">
+                <a href="#">
+                    <img src="{% static "images/person/person_logo.png" %}" alt="CoolAdmin" />
+                </a>
+            </div>
+            <div class="header__navbar">
+                <ul class="list-unstyled">
+                    <li class="has-sub">
+                        <a href="/person_home">
+                            <i class="fas fa-tachometer-alt"></i>Report
+                            <span class="bot-line"></span>
+                        </a>
+                        <ul class="header3-sub-list list-unstyled">
+                            <li>
+                                <a href="/view_previous_reports">View Previous Reports</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="#">
+                            <i class="fas fa-tachometer-alt"></i>Meeting
+                            <span class="bot-line"></span>
+                        </a>
+                        <ul class="header3-sub-list list-unstyled" style="padding: 10px 16px">
+                            <li>
+                                <a href="/arrange_meeting">Arrange a meeting</a>
+                            </li>
+                            <li>
+                                <a href="/view_all_meetings">View Past meetings</a>
+                            </li>
+                        </ul>
+                    </li>                  
+                </ul>
+            </div>
+            <div class="header__tool">
+                <div class="account-wrap">
+                    <div class="account-item account-item--style2 clearfix js-item-menu">
+                        <div class="image">
+                            <img src="{% static "images/person/person_icon.png" %}" />
+                        </div>
+                        <div class="content">
+                            <a class="js-acc-btn" href="#">{{ user.username }}</a>
+                        </div>
+                        <div class="account-dropdown js-dropdown">
+                            <div class="info clearfix">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="{% static "images/person/person_icon.png" %}" />
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <h5 class="name">
+                                        <a href="#">{{ user.username }}</a>
+                                    </h5>
+                                    <span class="email">{{ user.email }}</span>
+                                </div>
+                            </div>
+                            <div class="account-dropdown__body">
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                </div>
+                            </div>
+                            <div class="account-dropdown__footer">
+                                <a href="#">
+                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

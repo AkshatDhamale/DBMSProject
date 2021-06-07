@@ -1,0 +1,76 @@
+{% load static %}
+<div class="logo">
+    <a href="#">
+        <img src="{% static "images/admin/admin_logo.png" %}" alt="Cool Admin" />
+    </a>
+</div>
+<div class="menu-sidebar__content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar__list">
+            <li class="active">
+                <a href="/police_home">
+                    <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-users"></i>Manage Police</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/add_police">Add Police</a>
+                    </li>
+                    <li>
+                        <a href="/remove_police">Remove Police</a>
+                    </li>
+                    <li>
+                        <a href="/view_police">Edit Police</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-gavel"></i>Manage Court</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/add_court">Add Court</a>
+                    </li>
+                    <li>
+                        <a href="/remove_court">Remove Court</a>
+                    </li>
+                    <li>
+                        <a href="/view_courts">Edit Court</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-link"></i>Manage Jail</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/add_jail">Add Jail</a>
+                    </li>
+                    <li>
+                        <a href="/remove_jail">Remove Jail</a>
+                    </li>
+                    <li>
+                        <a href="/view_jail">Edit Jail</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-user-md"></i>Manage Doctor</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/add_doctor">Add Doctor</a>
+                    </li>
+                    <li>
+                        <a href="/remove_doctor">Remove Doctor</a>
+                    </li>
+                    <li>
+                        <a href="/view_doctor">Edit Doctor</a>
+                    </li>
+                </ul>
+            </li>         
+        </ul>
+    </nav>
+</div>

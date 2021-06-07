@@ -1,0 +1,75 @@
+{% load static %}
+<div class="logo">
+    <a href="#">
+        <img src="{% static "images/jail/jail_logo.png" %}" alt="Cool Admin" />
+    </a>
+</div>
+<div class="menu-sidebar__content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar__list">
+            <li class="active">
+                <a href="/police_home">
+                    <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-key"></i>Manage Cell </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_all_cell">View All Cells</a>
+                    </li>
+                    <li>
+                        <a href="/add_cell">Add Cell</a>
+                    </li>
+                    <li>               
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-user"></i>Criminals</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_all_criminal">View all Criminals</a>
+                    </li>
+                    <li>
+                        <a href="/view_not_alloted">Added by court</a>
+                    </li>
+                    <li>
+                        <a href="/view_alloted">Alloted</a>
+                    </li>
+                    <li>
+                        <a href="/view_released">Released</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-inbox"></i>Work</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_all_work">View All</a>
+                    </li>
+                    <li>
+                        <a href="/assign_work">Assign Work</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/view_healthrecord">
+                    <i class="fas fa-medkit"></i>Health Records</a>
+            </li> 
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-users"></i>Meeting Requests</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_new_meeting">View new</a>
+                    </li>
+                    <li>
+                        <a href="/view_past_meetings">Past meetings</a>
+                    </li>
+                </ul>
+            </li> 
+        </ul>
+    </nav>
+</div>

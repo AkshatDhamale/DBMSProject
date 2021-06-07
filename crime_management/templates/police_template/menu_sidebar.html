@@ -1,0 +1,69 @@
+{% load static %}
+<div class="logo">
+    <a href="#">
+        <img src="{% static "images/icon/police_logo.png" %}" alt="Cool Admin" >
+    </a>
+</div>
+<div class="menu-sidebar__content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar__list">
+            <li class="active">
+                <a href="/police_home">
+                    <i class="fas fa-home"></i>Home</a>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-search"></i>Investigation</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_investigation_all">All </a>
+                    </li>
+                    <li>
+                        <a href="/view_investigation_notstarted">Not Started</a>
+                    </li>
+                    <li>
+                        <a href="/view_investigation_pending">In Process</a>
+                    </li>
+                    <li>
+                        <a href="/view_investigation_completed">Completed</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-archive"></i>Reports</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/view_report_all">All Reports</a>
+                    </li>
+                    <li>
+                        <a href="/view_completed_report">Completed Reports</a>
+                    </li>
+                    <li>
+                        <a href="/view_dismissed_report">Dismissed Reports</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/view_witnesses">
+                    <i class="fas fa-users"></i>Witnesses</a>
+            </li>
+            <li>
+                <a href="/view_suspects">
+                    <i class="fas fa-users"></i>Suspects</a>
+            </li>
+            <li>
+                <a href="/view_all_criminals_police">
+                    <i class="fas fa-users"></i>Criminals</a>
+            </li>
+            <li>
+                <a href="/view_theories">
+                    <i class="fas fa-list"></i>Theories</a>
+            </li>
+            <li>
+                <a href="/view_charge_sheets">
+                    <i class="fas fa-file-text"></i>Charge Sheet</a>
+            </li>
+        </ul>
+    </nav>
+</div>
