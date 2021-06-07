@@ -48,7 +48,7 @@ def GetUserDetails(request):
     
 def LogoutUser(request):
     logout(request)
-    return HttpResponseRedirect("/")
+    return render(request,'')
 
 def ViewRegister(request):
     return render(request,'Register.html')
