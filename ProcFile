@@ -1,1 +1,1 @@
-web: gunicorn dbms.wsgi --log-file -
+"web: gunicorn dbms.wsgi --log-file -" 
