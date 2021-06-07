@@ -21,8 +21,10 @@ def police_home(request):
 
 def view_charge_sheets(request):
     reports=Report.objects.all().filter(status="Viewed")
-    reportids=[i.id for i in reports]
-    investigations=Investigation_Report.objects.all().filter(report_id__in = reportids)
+    reportids=[int(i.id) for i in reports]
+    investigations=Investigation_Report.objects.all()
+    for j in reportids:
+        investigations.filter(report_id=j)
     return render(request,"police_template/view_charge_sheets.html",{"investigations":investigations})
 
 def Charge_sheet(request,rep_id):
@@ -458,28 +460,28 @@ def add_investigation_save(request):
         legit_reason=request.POST.get("legit_reason")      
 
         try:
+            '''
             if legit_reason == "No":
                 investigation_model=Investigation_Report(report_id=report_id,legit_reason=legit_reason,legit_report=legit_report)
                 investigation_model.save()
-
                 report_model=Report.objects.get(id=report_id)
                 report_model.status="Dismissed"
                 report_model.save()
 
-            elif legit_reason == "Yes":
-                investigation_model=Investigation_Report(report_id=report_id,legit_report=legit_report,scene_address=report_scene_address,scene_firstvisited=report_scene_firstdate,
-                scene_description=report_scene_description,first_officer=first_officer,assisting_officer=assisting_officer,
-                main_witness_name=main_witness_name,main_witness_email=main_witness_email,main_witness_address=main_witness_address,
-                main_witness_phone_no=main_witness_phoneno,main_witness_DOB=main_witness_DOB,main_witness_description=main_witness_desc,
-                main_witness_blame=main_witness_blame,main_suspect_name=main_suspect_name,main_suspect_email=main_suspect_email,
-                main_suspect_address=main_suspect_address,main_suspect_phone_no=main_suspect_phoneno,main_suspect_DOB=main_suspect_DOB,
-                main_suspect_description=main_suspect_desc,main_suspect_defense=main_suspect_defense,legit_reason=legit_reason)
-                investigation_model.save()
+            elif legit_reason == "Yes":'''
+            investigation_model=Investigation_Report(report_id=report_id,legit_report=legit_report,scene_address=report_scene_address,scene_firstvisited=report_scene_firstdate,
+            scene_description=report_scene_description,first_officer=first_officer,assisting_officer=assisting_officer,
+            main_witness_name=main_witness_name,main_witness_email=main_witness_email,main_witness_address=main_witness_address,
+            main_witness_phone_no=main_witness_phoneno,main_witness_DOB=main_witness_DOB,main_witness_description=main_witness_desc,
+            main_witness_blame=main_witness_blame,main_suspect_name=main_suspect_name,main_suspect_email=main_suspect_email,
+            main_suspect_address=main_suspect_address,main_suspect_phone_no=main_suspect_phoneno,main_suspect_DOB=main_suspect_DOB,
+            main_suspect_description=main_suspect_desc,main_suspect_defense=main_suspect_defense,legit_reason=legit_reason)
+            investigation_model.save()
             messages.success(request,"Successfully added the investigation report")
-            return HttpResponseRedirect("/add_investigation/"+report_id)
+            return HttpResponseRedirect("/view_investigation_all")
         except:
             messages.error(request,"Failed to add the investigation report")
-            return HttpResponseRedirect("/add_investigation/"+report_id)
+            return HttpResponseRedirect("/view_investigation_all")
 
 def show_investigation(request,rep_id):
     report=Report.objects.get(id=rep_id)
