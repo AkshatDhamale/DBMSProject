@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.ShowLoginPage,name="show_login"),
     path('get_user_details', views.GetUserDetails),
-    path('logout_user', views.LogoutUser),
+    path('logout_user', views.LogoutUser,name="logout_user"),
     path('doLogin',views.doLogin,name="dologin"),
     path('login_test',views.showlogin_test),
 

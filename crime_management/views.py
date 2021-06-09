@@ -48,10 +48,10 @@ def GetUserDetails(request):
     
 def LogoutUser(request):
     logout(request)
-    return render(request,'')
+    return HttpResponseRedirect("/")
 
 def ViewRegister(request):
-    return render(request,'Register.html')
+    return render(request,"Register.html")
 
 def do_person_register(request):
     name=request.POST.get("Name")
@@ -78,5 +78,4 @@ def do_person_register(request):
         return HttpResponseRedirect("/")
     
 
-    return HttpResponse("Admin User Created")
 

@@ -4,7 +4,9 @@ from crime_management.models import CustomUser,ChargeSheet
 from crime_management.models import Police,Court,Jail,Doctor
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url="/")
 def admin_home(request):
     polices=Police.objects.all()
     courts=Court.objects.all()
@@ -65,6 +67,8 @@ def remove_police_save(request):
 
         try:
             police_model=Police.objects.get(admin_id=police_id)
+            customuser_model=CustomUser.objects.get(id=police_model.admin_id)
+            customuser_model.delete()
             police_model.delete()
             messages.success(request,"Successfully deleted")
             return HttpResponseRedirect("/remove_police")
@@ -162,6 +166,8 @@ def remove_court_save(request):
 
         try:
             court_model=Court.objects.get(admin_id=court_id)
+            customuser_model=CustomUser.objects.get(id=court_model.admin_id)
+            customuser_model.delete()
             court_model.delete()
             messages.success(request,"Successfully deleted")
             return HttpResponseRedirect("/remove_court")
@@ -244,6 +250,8 @@ def remove_jail_save(request):
 
         try:
             jail_model=Jail.objects.get(admin_id=jail_id)
+            customuser_model=CustomUser.objects.get(id=jail_model.admin_id)
+            customuser_model.delete()
             jail_model.delete()
             messages.success(request,"Successfully deleted")
             return HttpResponseRedirect("/remove_jail")
@@ -338,6 +346,8 @@ def remove_doctor_save(request):
 
         try:
             doctor_model=Doctor.objects.get(admin_id=doctor_id)
+            customuser_model=CustomUser.objects.get(id=doctor_model.admin_id)
+            customuser_model.delete()
             doctor_model.delete()
             messages.success(request,"Successfully deleted")
             return HttpResponseRedirect("/remove_doctor")

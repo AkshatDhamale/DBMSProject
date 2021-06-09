@@ -53,7 +53,7 @@ class logincheckmiddleware(MiddlewareMixin):
             else:
                 return HttpResponseRedirect(reverse("show_login"))
         else:
-            if (request.path == reverse("show_login")) or (request.path == reverse("dologin")):
+            if (request.path == reverse("show_login")) or (request.path == reverse("dologin")) or (request.path == reverse("Register")):
                 pass
             else:
                 return HttpResponseRedirect(reverse("show_login"))
