@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Edit Report {{ report.id }}</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-4.7/css/font-awesome.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/font-awesome-5/css/fontawesome-all.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/mdi-font/css/material-design-iconic-font.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static "vendor/bootstrap-4.1/bootstrap.min.css" %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static "vendor/animsition/animsition.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/wow/animate.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/slick/slick.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/select2/select2.min.css" %}" rel="stylesheet" media="all">
+    <link href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static "css/theme.css" %}" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        {% include 'police_template/header_police.html' %}
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            {% include 'police_template/menu_sidebar.html' %}
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!--HEADER DESKTOP-->
+        <div class="page-container">
+            {% include 'police_template/header_desktop.html' %}
+        <!--END HEADER DESKTOP-->
+
+            <!--MAIN FORM-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="/police_account_save" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}                        
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Police | id = {{police.id}}</strong>
+                                        </div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Position</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="police_position" placeholder="Text" class="form-control" value="{{ police.position }}" disabled>
+                                                    <input type="hidden" name="police_id" class="form-control" value="{{ police.id }}" >
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="police_name" placeholder="Text" class="form-control" value="{{ police.admin.username }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="police_email" placeholder="Text" class="form-control" value="{{ police.admin.email }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Address</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="police_address" placeholder="Text" class="form-control" value="{{ police.address }}" >
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Phone Number</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="police_phone_number" placeholder="Text" class="form-control" value="{{ police.phonenumber }}" >
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input name="police_DOB" type="date" rows="9" placeholder="Date" class="form-control" value="{{ police.DOB|date:'Y-m-d' }}"></input>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="police_sex" class=" form-control-label">Sex</label>
+                                                </div>
+                                                <div class="col-12 col-md-9" >
+                                                    <select name="police_sex" class="form-control">
+                                                        <option {% if police.Sex == "Null" %} selected {% endif %}>Please select</option>
+                                                        <option {% if police.Sex == "Male" %} selected {% endif %}>Male</option>
+                                                        <option {% if police.Sex == "Female" %} selected {% endif %}>Female</option>
+                                                        <option {% if police.Sex == "Other" %} selected {% endif %}>Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Your image</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" name="police_officer_image" class="form-control-file" style="padding-bottom: 10px;">
+                                                    <img src="{{ police.officer_image }}" style="max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                                </div>
+                                            </div>
+                                            {% if messages %}
+                                            <div class=" form-group">
+                                                {% for message in messages %}
+                                                {% if message.tags == 'error' %}
+                                                <div class="alert alert-danger col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                                {% endif %}
+                                                {% if message.tags == 'success' %}
+                                                <div class="alert alert-success col text-center" style="margin-bottom:10px">{{ message }}</div>
+                                                {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-dot-circle-o"></i> Save
+                                                </button>
+                                                <button type="reset" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-ban"></i> Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--END MAIN FORM-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static "vendor/jquery-3.2.1.min.js" %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static "vendor/bootstrap-4.1/popper.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-4.1/bootstrap.min.js" %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static "vendor/slick/slick.min.js" %}">
+    </script>
+    <script src="{% static "vendor/wow/wow.min.js" %}"></script>
+    <script src="{% static "vendor/animsition/animsition.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap-progressbar/bootstrap-progressbar.min.js" %}">
+    </script>
+    <script src="{% static "vendor/counter-up/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "vendor/counter-up/jquery.counterup.min.js" %}">
+    </script>
+    <script src="{% static "vendor/circle-progress/circle-progress.min.js" %}"></script>
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.js" %}"></script>
+    <script src="{% static "vendor/chartjs/Chart.bundle.min.js" %}"></script>
+    <script src="{% static "vendor/select2/select2.min.js" %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

@@ -40,6 +40,8 @@ urlpatterns = [
     path('view_report_all',PoliceViews.view_report_all),
     path('edit_report/<str:rep_id>', PoliceViews.edit_report),
     path('edit_report_save',PoliceViews.edit_report_save),
+    path('police_account',PoliceViews.police_account,name="police_account"),
+    path('police_account_save',PoliceViews.police_account_save,name="police_account_save"),
     path('view_completed_report',PoliceViews.view_completed_report),
     path('view_dismissed_report',PoliceViews.view_dismissed_report),
     path('view_all_criminals_police',PoliceViews.view_all_criminals_police,name="view_all_criminals_police"),

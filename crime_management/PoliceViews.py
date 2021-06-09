@@ -19,6 +19,47 @@ def police_home(request):
     police=Police.objects.get(admin_id=request.user.id)
     return render(request,"police_template/base_template.html",{"reps":reps,"num_reports":num_reports,"police":police})
 
+def police_account(request):
+    police=Police.objects.get(admin_id=request.user.id)
+    return render(request,"police_template/police_account.html",{"police":police})
+
+def police_account_save(request):
+    if request.method!="POST":
+        return HttpResponse("Method not allowed")
+    else:
+        police_id=request.POST.get('police_id')
+        police_address=request.POST.get('police_address')
+        police_phone_number=request.POST.get('police_phone_number')
+        police_DOB=request.POST.get('police_DOB')
+        police_sex=request.POST.get('police_sex')
+
+        fs=FileSystemStorage()
+        doc=request.FILES
+
+        if 'police_officer_image' in doc:
+            police_officer_image = doc['police_officer_image']
+            filename1 = fs.save(police_officer_image.name,police_officer_image)
+            police_officer_image_url = fs.url(filename1)
+        else:
+            police_officer_image_url = None
+
+        try:
+            police_model=Police.objects.get(id=police_id)
+            police_model.address=police_address
+            police_model.phonenumber=police_phone_number
+            police_model.DOB=police_DOB
+            police_model.Sex=police_sex
+
+            if police_officer_image_url != None:
+                police_model.officer_image=police_officer_image_url
+
+            police_model.save()
+            messages.success(request,"Successfully edited")
+            return HttpResponseRedirect("/police_account")
+        except:
+            messages.error(request,"Failed to edit")
+            return HttpResponseRedirect("/police_account")
+
 def view_charge_sheets(request):
     reports=Report.objects.all().filter(status="Viewed")
     reportids=[int(i.id) for i in reports]
