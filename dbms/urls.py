@@ -95,7 +95,6 @@ urlpatterns = [
     path('view_all_meetings',PersonViews.view_all_meetings,name="view_all_meetings"),
     path('view_meet_details/<str:meeting_id>',PersonViews.view_meet_details,name="view_meet_details"),
     
-
 #admin urls
     path('admin_home',AdminViews.admin_home,name="admin_home"),
     path('add_police',AdminViews.add_police,name="add_police"),

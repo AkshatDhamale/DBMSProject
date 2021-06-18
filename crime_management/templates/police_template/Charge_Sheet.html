@@ -347,7 +347,8 @@
                                                     <label for="example-datetime-local-input" class=" form-control-label">Issued when</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input name="Issued_when" type="datetime-local" rows="9" placeholder="Date" class="form-control"></input>
+                                                    <input name="Issued_when" value="{{ report.created_at|date:'Y-m-d H:i' }}" type="datetime" rows="9" placeholder="Date"  class="form-control" disabled></input>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -355,7 +356,7 @@
                                                     <label for="textarea-input" class=" form-control-label">Investigation Details</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <textarea name="Investigation_details" rows="9" placeholder="Charges" class="form-control"></textarea>
+                                                    <textarea name="Investigation_details" rows="9" placeholder="Details" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row form-group">

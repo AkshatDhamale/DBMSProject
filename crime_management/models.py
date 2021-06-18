@@ -185,6 +185,7 @@ class Theories(models.Model):
 
 class ChargeSheet(models.Model):
     id=models.AutoField(primary_key=True)
+    created_at=models.DateTimeField(default=now,blank=True,null=True)
     charging_officer=models.CharField(max_length=255,default="username",null=True,blank=True)
     report_id=models.IntegerField(default=None,blank=True,null=True)
 
@@ -194,11 +195,11 @@ class ChargeSheet(models.Model):
     Accused_phone_no=models.CharField(max_length=15,default=None,null=True,blank=True)
     Accused_email=models.CharField(max_length=255,default=None,null=True,blank=True)
     Accused_sex=models.CharField(max_length=10,choices=[('M','Male'),('F','Female'),('Oth','Other')],default='M',null=True,blank=True)
-    Accused_Charges=models.TextField(default=None)
-    Accused_DOB=models.DateField(default=None)
+    Accused_Charges=models.TextField(default=None,blank=True,null=True)
+    Accused_DOB=models.DateField(default=None,blank=True,null=True)
     Accused_underwhatlaw=models.CharField(max_length=10,choices=[('State','State'),('Act','Act'),('Cwealth','CWealth'),('Reg','Reg'),('Other','Other')],default='State',null=True,blank=True)
     Accused_typeofoffense=models.CharField(max_length=20,choices=[('SO','Summary offense'),('IO','Indictable offense')],default='SO',null=True,blank=True)
-    Accused_Act=models.CharField(max_length=5,default=None,null=True,blank=True)
+    Accused_Act=models.CharField(max_length=100,default=None,null=True,blank=True)
     Accused_section=models.CharField(max_length=100,default=None,null=True,blank=True)
     Accused_image=models.FileField(max_length=255,default=None,null=True,blank=True)
     
@@ -208,9 +209,9 @@ class ChargeSheet(models.Model):
     Informant_phone_no=models.CharField(max_length=15,default=None,null=True,blank=True)
     Informant_email=models.CharField(max_length=255,default=None,null=True,blank=True)
     Informant_description=models.TextField(default=None,null=True,blank=True)
-    Informant_DOB=models.DateField(default=None)
+    Informant_DOB=models.DateField(default=None,blank=True,null=True)
     Informant_sex=models.CharField(max_length=10,choices=[('M','Male'),('F','Female'),('Oth','Other')],default='M',null=True,blank=True)
-    Informant_initial_report=models.DateField(default=now,null=True,blank=True)
+    Informant_initial_report=models.DateField(default=None,null=True,blank=True)
     Informant_image=models.FileField(max_length=255,default=None,null=True,blank=True)
     Informant_signature=models.FileField(max_length=255,default=None,null=True,blank=True)
     
@@ -219,7 +220,7 @@ class ChargeSheet(models.Model):
     Investigation_officer=models.CharField(max_length=255,default=None,null=True,blank=True)
     Assisting_officer=models.CharField(max_length=255,default=None,null=True,blank=True)
     Issued_at=models.CharField(max_length=255,default=None,null=True,blank=True)
-    Issued_when=models.DateTimeField(default=now,null=True,blank=True)
+    Issued_when=models.DateTimeField(default=None,null=True,blank=True)
     Investigation_details=models.TextField(default=None,null=True,blank=True)
 
     #Theories

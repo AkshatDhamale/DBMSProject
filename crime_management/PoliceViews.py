@@ -63,9 +63,7 @@ def police_account_save(request):
 def view_charge_sheets(request):
     reports=Report.objects.all().filter(status="Viewed")
     reportids=[int(i.id) for i in reports]
-    investigations=Investigation_Report.objects.all()
-    for j in reportids:
-        investigations.filter(report_id=j)
+    investigations=Investigation_Report.objects.all().filter(report_id__in = reportids)
     return render(request,"police_template/view_charge_sheets.html",{"investigations":investigations})
 
 def Charge_sheet(request,rep_id):
@@ -104,7 +102,6 @@ def Charge_sheet_save(request):
         Investigation_officer=request.POST.get("Investigation_officer")
         Assisting_officer=request.POST.get("Assisting_officer")
         Issued_at=request.POST.get("Issued_at")
-        Issued_when=request.POST.get("Issued_when")
         Investigation_details=request.POST.get("Investigation_details")
         Theories=request.POST.get("Theories")
         Witnesses=request.POST.get("Witnesses")
@@ -153,6 +150,8 @@ def Charge_sheet_save(request):
             Informant_signature_url = None
 
         try:
+            report_model=Report.objects.get(id=report_id)
+
             Charge_sheet_model=ChargeSheet(report_id=report_id,Accused_name=Accused_name,Accused_address=Accused_address,charging_officer=charging_officer,
             Accused_phone_no=Accused_phonenumber,Accused_email=Accused_email,Accused_sex=Accused_sex,Accused_Charges=Accused_Charges,
             Accused_DOB=Accused_DOB,Accused_underwhatlaw=Accused_law,Accused_typeofoffense=Accused_offense,Accused_Act=Accused_act,
@@ -161,13 +160,12 @@ def Charge_sheet_save(request):
             Informant_description=Informant_description,Informant_DOB=Informant_DOB,Informant_sex=Informant_sex,
             Informant_initial_report=Initial_report,Informant_image=Informant_image_url,Informant_signature=Informant_signature_url,
             Reporting_officer=Reporting_officer,Investigation_officer=Investigation_officer,Assisting_officer=Assisting_officer,
-            Issued_at=Issued_at,Issued_when=Issued_when,Investigation_details=Investigation_details,Theories=Theories,
+            Issued_at=Issued_at,Issued_when=report_model.created_at,Investigation_details=Investigation_details,Theories=Theories,
             Witnesses=Witnesses,Suspects=Suspects,Theory1=Theory_1,Theory2=Theory_2,Theory3=Theory_3,Theory4=Theory_4,Theory5=Theory_5,
             Witness1=Witness_1,Witness2=Witness_2,Witness3=Witness_3,Witness4=Witness_4,Witness5=Witness_5,
-            Suspect1=Suspect_1,Suspect2=Suspect_2,Suspect3=Suspect_3,Suspect4=Suspect_4,Suspect5=Suspect_5)
+            Suspect1=Suspect_1,Suspect2=Suspect_2,Suspect3=Suspect_3,Suspect4=Suspect_4,Suspect5=Suspect_5,status="Pending")
             Charge_sheet_model.save()
-
-            report_model=Report.objects.get(id=report_id)
+        
             report_model.status="Filed"
             report_model.save()
 
