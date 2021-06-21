@@ -24,6 +24,31 @@ def jail_home(request):
     "criminals_nowork_count":criminals_nowork_count,"criminals_nohealth_count":criminals_nohealth_count,"criminals":criminals,
     "jails":jails})
 
+def jail_account(request):
+    jail=Jail.objects.get(admin_id=request.user.id)
+    return render(request,"jail_template/jail_account.html",{"jail":jail})
+
+def jail_account_save(request):
+    if request.method!="POST":
+        return HttpResponse("Method not allowed")
+    else:
+        jail_id=request.POST.get('jail_id')
+        jail_address=request.POST.get('jail_address')
+        jail_phone_number=request.POST.get('jail_phone_number')
+        jail_jailer=request.POST.get('jail_jailer')
+
+        try:
+            jail_model=Jail.objects.get(id=jail_id)
+            jail_model.address=jail_address
+            jail_model.phonenumber=jail_phone_number
+            jail_model.jailer=jail_jailer
+            jail_model.save()
+            messages.success(request,"Successfully edited")
+            return HttpResponseRedirect("/jail_account")
+        except:
+            messages.error(request,"Failed to edit")
+            return HttpResponseRedirect("/jail_account")
+
 def view_not_alloted(request):
     criminals=Criminal.objects.all().filter(status="Sent")
     return render(request,"jail_template/view_not_alloted.html",{'criminals':criminals})

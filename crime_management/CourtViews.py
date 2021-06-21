@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect,HttpResponse
-from crime_management.models import CustomUser,ChargeSheet,Attorney,Judge,Case,Decision,Police,Decision,Jail,Criminal,Release
+from crime_management.models import Court,CustomUser,ChargeSheet,Attorney,Judge,Case,Decision,Police,Decision,Jail,Criminal,Release
 from django.core import serializers
 from django.http import JsonResponse
 from django.contrib import messages
@@ -16,6 +16,29 @@ def myconverter(o):
 def court_home(request):
     chargesheets=ChargeSheet.objects.all().filter(status='Pending').count()
     return render(request,"court_template/base_template_court.html",{"chargesheets":chargesheets})
+
+def court_account(request):
+    court=Court.objects.get(admin_id=request.user.id)
+    return render(request,"court_template/court_account.html",{"court":court})
+
+def court_account_save(request):
+    if request.method!="POST":
+        return HttpResponse("Method not allowed")
+    else:
+        court_id=request.POST.get('court_id')
+        court_address=request.POST.get('court_address')
+        court_phone_number=request.POST.get('court_phone_number')
+
+        try:
+            court_model=Court.objects.get(id=court_id)
+            court_model.address=court_address
+            court_model.phonenumber=court_phone_number
+            court_model.save()
+            messages.success(request,"Successfully edited")
+            return HttpResponseRedirect("/police_account")
+        except:
+            messages.error(request,"Failed to edit")
+            return HttpResponseRedirect("/police_account")
 
 def view_chargesheets(request):
     chargesheet=ChargeSheet.objects.all()

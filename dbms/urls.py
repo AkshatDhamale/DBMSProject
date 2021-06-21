@@ -129,6 +129,8 @@ urlpatterns = [
 
 #Court urls
     path('court_home',CourtViews.court_home,name="court_home"),
+    path('court_account',CourtViews.court_account,name="court_account"),
+    path('court_account_save',CourtViews.court_account_save,name="court_account_save"),
     path('view_chargesheets',CourtViews.view_chargesheets,name="view_chargesheets"),
     path('show_chargesheet/<str:charge_id>',CourtViews.show_chargesheet,name="show_chargesheet"),
     path('add_case/<str:charge_id>',CourtViews.add_case,name="add_case"),
@@ -157,6 +159,8 @@ urlpatterns = [
 
 #Jail urls
     path('jail_home',JailViews.jail_home,name="jail_home"),
+    path('jail_account',JailViews.jail_account,name="jail_account"),
+    path('jail_account_save',JailViews.jail_account_save,name="jail_account_save"),
     path('view_not_alloted',JailViews.view_not_alloted,name="view_not_alloted"),
     path('add_cell',JailViews.add_cell,name="add_cell"),
     path('add_cell_save',JailViews.add_cell_save,name="add_cell_save"),

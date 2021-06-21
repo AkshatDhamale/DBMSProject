@@ -37,50 +37,37 @@
 </head>
 
 <body class="animsition">
-    <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        {% include 'police_template/header_police.html' %}
-        <!-- END HEADER MOBILE-->
-
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
-            {% include 'police_template/menu_sidebar.html' %}
+            {% include 'jail_template/menu_sidebar_jail.html' %}
         </aside>
         <!-- END MENU SIDEBAR-->
 
         <!--HEADER DESKTOP-->
         <div class="page-container">
-            {% include 'police_template/header_desktop.html' %}
+            {% include 'jail_template/header_desktop_jail.html' %}
         <!--END HEADER DESKTOP-->
 
             <!--MAIN FORM-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <form action="/police_account_save" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        <form action="/jail_account_save" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         {% csrf_token %}                        
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <strong>Police | id = {{police.id}}</strong>
+                                            <strong>jail | id = {{jail.id}}</strong>
                                         </div>
                                         <div class="card-body card-block">
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Position</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" name="police_position" placeholder="Text" class="form-control" value="{{ police.position }}" disabled>
-                                                    <input type="hidden" name="police_id" class="form-control" value="{{ police.id }}" >
-                                                </div>
-                                            </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="text-input" class=" form-control-label">Name</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" name="police_name" placeholder="Text" class="form-control" value="{{ police.admin.username }}" disabled>
+                                                    <input type="text" name="jail_name" placeholder="Text" class="form-control" value="{{ jail.admin.username }}" disabled>
+                                                    <input type="hidden" name="jail_id" class="form-control" value="{{ jail.id }}" >
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -88,7 +75,16 @@
                                                     <label for="text-input" class=" form-control-label">Email</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" name="police_email" placeholder="Text" class="form-control" value="{{ police.admin.email }}" disabled>
+                                                    <input type="text" name="jail_email" placeholder="Text" class="form-control" value="{{ jail.admin.email }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Jailer</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" name="jail_jailer" placeholder="Text" class="form-control" value="{{ jail.jailer }}" >
+                                                    
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -96,7 +92,7 @@
                                                     <label for="text-input" class=" form-control-label">Address</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" name="police_address" placeholder="Text" class="form-control" value="{{ police.address }}" >
+                                                    <input type="text" name="jail_address" placeholder="Text" class="form-control" value="{{ jail.address }}" >
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -104,37 +100,7 @@
                                                     <label for="text-input" class=" form-control-label">Phone Number</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" name="police_phone_number" placeholder="Text" class="form-control" value="{{ police.phonenumber }}" >
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="example-date-input" class=" form-control-label">Date of Birth</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input name="police_DOB" type="date" rows="9" placeholder="Date" class="form-control" value="{{ police.DOB|date:'Y-m-d' }}"></input>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="police_sex" class=" form-control-label">Sex</label>
-                                                </div>
-                                                <div class="col-12 col-md-9" >
-                                                    <select name="police_sex" class="form-control">
-                                                        <option {% if police.Sex == "Null" %} selected {% endif %}>Please select</option>
-                                                        <option {% if police.Sex == "Male" %} selected {% endif %}>Male</option>
-                                                        <option {% if police.Sex == "Female" %} selected {% endif %}>Female</option>
-                                                        <option {% if police.Sex == "Other" %} selected {% endif %}>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="file-input" class=" form-control-label">Your image</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="file" name="police_officer_image" class="form-control-file" style="padding-bottom: 10px;">
-                                                    <img src="{{ police.officer_image }}" style="max-width: 250px; height: auto; border-radius: 10px; margin-bottom: 10px;">
+                                                    <input type="text" name="jail_phone_number" placeholder="Text" class="form-control" value="{{ jail.phonenumber }}" >
                                                 </div>
                                             </div>
                                             {% if messages %}
