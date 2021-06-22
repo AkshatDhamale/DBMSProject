@@ -194,6 +194,11 @@ urlpatterns = [
 
 #Doctor urls
     path('doctor_home',DoctorViews.doctor_home,name="doctor_home"),
+    path('doctor_account',DoctorViews.doctor_account,name="doctor_account"),
+    path('doctor_account_save',DoctorViews.doctor_account_save,name="doctor_account_save"),
+    path('add_monthly_checkup',DoctorViews.add_monthly_checkup,name="add_monthly_checkup"),
+    path('add_monthly_save',DoctorViews.add_monthly_save,name="add_monthly_save"),
+    path('view_monthly_checkups',DoctorViews.view_monthly_checkups,name="view_monthly_checkups"),
     path('add_health_record',DoctorViews.add_health_record,name="add_health_record"),
     path('doc_criminal_info',DoctorViews.doc_criminal_info,name="doc_criminal_info"),
     path('add_health_record_save',DoctorViews.add_health_record_save,name="add_health_record_save"),

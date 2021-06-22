@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Health Records</title>
 
     <!-- Fontfaces CSS-->
     <link href="{% static "css/font-face.css" %}" rel="stylesheet" media="all">
@@ -44,18 +44,18 @@
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
-        {% include 'jail_template/header_jail.html' %}
+        {% include 'doctor_template/header_doctor.html' %}
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
-            {% include 'jail_template/menu_sidebar_jail.html' %}
+            {% include 'doctor_template/menu_sidebar_doctor.html' %}
         </aside>
         <!-- END MENU SIDEBAR-->
 
         <!--HEADER DESKTOP-->
         <div class="page-container">
-            {% include 'jail_template/header_desktop_jail.html' %}
+            {% include 'doctor_template/header_desktop_doctor.html' %}
         <!--END HEADER DESKTOP-->
         
         <!--MAIN CONTENT-->
@@ -66,10 +66,10 @@
                         <div class="col-lg-12">
                             <div class="table-responsive table--no-card m-b-30">
                                 <h3 class="title-3 m-b-30">
-                                    <i class="zmdi zmdi-account-calendar"></i>All Meetings requested</h3>
+                                    <i class="zmdi zmdi-account-calendar"></i>All Monthly Checkups of criminals</h3>
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-right">
-                                        <input class="au-input au-input--xl " type="text" name="search" id="searchbyletter" placeholder="Search for meeting details..." style="margin-right:10px;"/>
+                                        <input class="au-input au-input--xl " type="text" name="search" id="searchbyletter" placeholder="Search for details..." style="margin-right:10px;"/>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
@@ -77,31 +77,21 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Doctor ID</th>
+                                                <th>Month</th>
                                                 <th>Criminal ID</th>
-                                                <th>Criminal Name</th>
-                                                <th>Jaid ID</th>
-                                                <th>Person Name</th>
-                                                <th>Relation</th>
-                                                <th>Occupation</th>            
-                                                <th></th>
+                                                <th>Jail ID</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {% for meeting in meetings %}
+                                        {% for MonthlyCheckup in MonthlyCheckups %}
                                             <tr class="tr-shadow">
-                                                <td>{{ meeting.id }}</td>  
-                                                <td>{{ meeting.criminal_id }}</td>                                             
-                                                <td>{{ meeting.criminal_name }}</td>
-                                                <td>{{ meeting.jail_id }}</td>
-                                                <td>{{ meeting.meeting_name }}</td>
-                                                <td>{{ meeting.criminal_relation }}</td>
-                                                <td>{{ meeting.occupation_name }}</td>
-                                                <td class="text-right">
-                                                    <a href="view_meeting_details/{{ meeting.id }}" class="au-btn au-btn-icon au-btn--blue au-btn--small" style="margin-left:-30px; color:white;">
-                                                    <i class="zmdi zmdi-view-list-alt" style="color:white; " ></i>View Details
-                                                </td>
+                                                <td>{{ MonthlyCheckup.id }}</td>
+                                                <td>{{ MonthlyCheckup.doctor_id }}</td>                                                                                   
+                                                <td>{{ MonthlyCheckup.month }}</td>
+                                                <td>{{ MonthlyCheckup.criminal_id }}</td>
+                                                <td>{{ MonthlyCheckup.jail_id }}</td>
                                             </tr>
-                                            <tr class="spacer"></tr> 
                                         {% endfor %}                                           
                                         </tbody>
                                     </table>

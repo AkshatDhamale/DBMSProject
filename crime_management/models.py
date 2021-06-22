@@ -526,6 +526,9 @@ class MonthlyCheckup(models.Model):
     jail_id=models.IntegerField(default=None,null=True,blank=True)
     doctor_id=models.IntegerField(default=None,null=True,blank=True)
     created_at=models.DateTimeField(default=now)
+    month=models.CharField(choices=[('January','January'),('February','February'),('March','March'),
+    ('April','April'),('May','May'),('June','June'),('July','July'),('August','August'),('September','September'),
+    ('October','October'),('November','November'),('December','December')],max_length=255,default=None,blank=True,null=True)
 
     weight=models.IntegerField(default=0,null=True,blank=True)
     BMI=models.IntegerField(default=0,null=True,blank=True)
