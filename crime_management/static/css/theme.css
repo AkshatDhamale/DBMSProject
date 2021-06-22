@@ -347,7 +347,7 @@ section {
 }
 
 .lavalite-bg { 
-    height: 100vh; 
+    height: 100%; 
     position: relative; 
     width: 100%; 
     -webkit-background-size: cover; 
