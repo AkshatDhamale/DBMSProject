@@ -10,7 +10,8 @@ The System is widely divided into five sections consisting of
 -	Police
 -	Court
 -	Jail
--	Doctor
+-	Doctor  
+
 The five sections depicts the entire process from filing a report to release a criminal after his sentence. 
 Whenever a crime is committed, the person/persons/organization can report the crime through this system. The report will then be sent to the police section, where police authorities can view the report and carry out appropriate investigation based on the report. Police may find suspects, witnesses and come up with theories for the event which are essentially the required things during an investigation. If the report turns out to be false then it will be rejected and the investigation will stop, otherwise if the guilty party is found then a chargesheet will be filed against him/her/them.
 
